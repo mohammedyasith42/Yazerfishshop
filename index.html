@@ -1,0 +1,840 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Yazer Fish Shop - Fresh From Ocean To Your Home</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Montserrat:wght@500;600;700&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
+    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/animation.css">
+    <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body>
+    
+    <div id="loading-screen">
+        <div class="loader">
+            <div class="fish-swim">
+                <i class="fas fa-fish"></i>
+            </div>
+            <p>Loading Fresh Seafood...</p>
+        </div>
+    </div>
+
+    <div id="progress-bar"></div>
+
+    <div class="floating-buttons">
+        <a href="https://wa.me/916374613587" target="_blank" class="floating-btn whatsapp" data-bs-toggle="tooltip" data-bs-placement="left" title="WhatsApp Order">
+            <i class="fab fa-whatsapp"></i>
+        </a>
+        <a href="tel:+916374613587" class="floating-btn call" data-bs-toggle="tooltip" data-bs-placement="left" title="Call Us">
+            <i class="fas fa-phone-alt"></i>
+        </a>
+    </div>
+
+    <button id="back-to-top" class="btn btn-primary rounded-circle">
+        <i class="bi bi-arrow-up"></i>
+    </button>
+
+    <nav class="navbar navbar-expand-lg fixed-top navbar-glass">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">
+                <i class="fas fa-fish"></i> Yazer Fish Shop
+            </a>
+            
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            
+            <div class="collapse navbar-collapse" id="navbarNav" style="padding-left: 400px;">
+                <ul class="navbar-nav me-auto mx-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="index.html">Home</a>
+                    </li>
+                    <!-- <li class="nav-item">
+                        <a class="nav-link" href="shop.html">Shop</a>
+                    </li> -->
+                    <li class="nav-item">
+                        <a class="nav-link" href="#categories">Categories</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#about">About</a>
+                    </li>
+                    <!-- <li class="nav-item">
+                        <a class="nav-link" href="#offers">Offers</a>
+                    </li> -->
+                    <li class="nav-item">
+                        <a class="nav-link" href="#testimonials">Testimonials</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#contact">Contact</a>
+                    </li>
+                </ul>
+                
+                <!-- <div class="d-flex align-items-center gap-3">
+                    <div class="search-wrapper">
+                        <button class="btn btn-outline-light" id="search-toggle">
+                            <i class="bi bi-search"></i>
+                        </button>
+                    </div>
+                    
+                    <button class="btn btn-outline-light position-relative" id="wishlist-toggle">
+                        <i class="bi bi-heart"></i>
+                        <span class="badge bg-warning text-dark position-absolute top-0 start-100 translate-middle rounded-pill">0</span>
+                    </button>
+                    
+                    <button class="btn btn-outline-light position-relative" id="cart-toggle">
+                        <i class="bi bi-cart3"></i>
+                        <span class="badge bg-danger position-absolute top-0 start-100 translate-middle rounded-pill">0</span>
+                    </button>
+                    
+                    <a href="login.html" class="btn btn-primary">
+                        <i class="bi bi-person-circle"></i> Login
+                    </a>
+                </div> -->
+            </div>
+        </div>
+    </nav>
+
+    <div id="search-popup" class="search-popup">
+        <div class="container">
+            <div class="search-box">
+                <button class="btn-close" id="search-close"><i class="bi bi-x-lg"></i></button>
+                <input type="text" id="search-input" class="form-control" placeholder="Search for fresh seafood...">
+                <div id="search-suggestions" class="search-suggestions"></div>
+            </div>
+        </div>
+    </div>
+
+    <div id="cart-sidebar" class="cart-sidebar">
+        <div class="cart-header">
+            <h4><i class="bi bi-cart3"></i> Your Cart</h4>
+            <button id="cart-close" class="btn-close"><i class="bi bi-x-lg"></i></button>
+        </div>
+        <div class="cart-items" id="cart-items">
+            <p class="text-center text-muted">Your cart is empty</p>
+        </div>
+        <div class="cart-footer">
+            <div class="cart-summary">
+                <div class="d-flex justify-content-between">
+                    <span>Subtotal:</span>
+                    <strong id="cart-subtotal">₹0.00</strong>
+                </div>
+                <div class="d-flex justify-content-between">
+                    <span>GST (5%):</span>
+                    <strong id="cart-gst">₹0.00</strong>
+                </div>
+                <div class="d-flex justify-content-between">
+                    <span>Delivery:</span>
+                    <strong id="cart-delivery">Free</strong>
+                </div>
+                <hr>
+                <div class="d-flex justify-content-between total">
+                    <span>Total:</span>
+                    <strong id="cart-total">₹0.00</strong>
+                </div>
+            </div>
+            <button class="btn btn-primary w-100" onclick="checkout()">Proceed to Checkout</button>
+        </div>
+    </div>
+
+    <div id="cart-overlay" class="cart-overlay"></div>
+
+    <section class="hero-section">
+        <div class="wave-bg">
+            <div class="wave wave1"></div>
+            <div class="wave wave2"></div>
+            <div class="wave wave3"></div>
+        </div>
+        
+        <div class="container">
+            <div class="row align-items-center min-vh-100">
+                <div class="col-lg-6" data-aos="fade-right">
+                    <span class="tagline">Fresh From Ocean To Your Home</span>
+                    <h1 class="hero-title">Fresh Seafood<br><span class="gradient-text">Delivered Daily</span></h1>
+                    <p class="hero-subtitle">100% Fresh | Hygienically Packed | Fast Delivery</p>
+                    <div class="hero-buttons">
+                        <!-- <a href="shop.html" class="btn btn-primary btn-lg">Shop Now <i class="bi bi-arrow-right"></i></a> -->
+                        <a href="#categories" class="btn btn-outline-light btn-lg">Explore Categories</a>
+                    </div>
+                </div>
+                <div class="col-lg-6" data-aos="fade-left">
+                    <div class="hero-image">
+                        <img src="images/WhatsApp Image 2026-07-18 at 5.06.18 PM.jpeg" alt="Fresh Seafood" class="img-fluid floating">
+                        <div class="bubble bubble-1"></div>
+                        <div class="bubble bubble-2"></div>
+                        <div class="bubble bubble-3"></div>
+                        <div class="fish-float">
+                            <i class="fas fa-fish"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section categories-section" id="categories">
+        <div class="container">
+            <div class="section-header text-center mb-5" data-aos="fade-up">
+                <h2>Shop By <span class="gradient-text">Categories</span></h2>
+                <p>Explore our wide range of premium quality seafood</p>
+            </div>
+            
+            <div class="row g-4">
+                <div class="col-md-3 col-6" data-aos="zoom-in" data-aos-delay="100">
+                    <a class="category-card text-decoration-none" aria-label="Shop fish">
+                        <div class="category-img">
+                            <img src="images/katla_whole_1__1_1.jpg" alt="Fish">
+                        </div>
+                        <h5>Fish</h5>
+                        <span class="item-count">50+ Varieties</span>
+                    </a>
+                </div>
+                <div class="col-md-3 col-6" data-aos="zoom-in" data-aos-delay="200">
+                    <a class="category-card text-decoration-none"  aria-label="Shop chicken">
+                        <div class="category-img">
+                            <img src="images/" alt="Chicken">
+                        </div>
+                        <h5>Chicken</h5>
+                        <span class="item-count">20+ Varieties</span>
+                    </a>
+                </div>
+                <div class="col-md-3 col-6" data-aos="zoom-in" data-aos-delay="300">
+                    <a class="category-card text-decoration-none"aria-label="Shop mutton">
+                        <div class="category-img">
+                            <img src="https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=fresh%20mutton%20raw%20premium%20meat%20lamb&image_size=square_hd" alt="Mutton">
+                        </div>
+                        <h5>Mutton</h5>
+                        <span class="item-count">15+ Varieties</span>
+                    </a>
+                </div>
+                <div class="col-md-3 col-6" data-aos="zoom-in" data-aos-delay="400">
+                    <a class="category-card text-decoration-none"  aria-label="Shop prawns">
+                        <div class="category-img">
+                            <img src="https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=fresh%20prawns%20shrimp%20seafood%20premium&image_size=square_hd" alt="Prawns">
+                        </div>
+                        <h5>Prawns</h5>
+                        <span class="item-count">10+ Varieties</span>
+                    </a>
+                </div>
+                <div class="col-md-3 col-6" data-aos="zoom-in" data-aos-delay="500">
+                    <a class="category-card text-decoration-none"  aria-label="Shop crab">
+                        <div class="category-img">
+                            <img src="https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=fresh%20crab%20seafood%20premium%20ocean&image_size=square_hd" alt="Crab">
+                        </div>
+                        <h5>Crab</h5>
+                        <span class="item-count">8+ Varieties</span>
+                    </a>
+                </div>
+                <div class="col-md-3 col-6" data-aos="zoom-in" data-aos-delay="600">
+                    <a class="category-card text-decoration-none" aria-label="Shop squid">
+                        <div class="category-img">
+                            <img src="https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=fresh%20squid%20calamari%20seafood%20premium&image_size=square_hd" alt="Squid">
+                        </div>
+                        <h5>Squid</h5>
+                        <span class="item-count">5+ Varieties</span>
+                    </a>
+                </div>
+                <div class="col-md-3 col-6" data-aos="zoom-in" data-aos-delay="700">
+                    <a class="category-card text-decoration-none"  aria-label="Shop dry fish">
+                        <div class="category-img">
+                            <img src="https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=dried%20fish%20seafood%20assortment%20premium&image_size=square_hd" alt="Dry Fish">
+                        </div>
+                        <h5>Dry Fish</h5>
+                        <span class="item-count">25+ Varieties</span>
+                    </a>
+                </div>
+                <div class="col-md-3 col-6" data-aos="zoom-in" data-aos-delay="800">
+                    <a class="category-card text-decoration-none" aria-label="Shop ready-to-cook items">
+                        <div class="category-img">
+                            <img src="https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=ready%20to%20cook%20seafood%20marinated%20premium&image_size=square_hd" alt="Ready To Cook">
+                        </div>
+                        <h5>Ready To Cook</h5>
+                        <span class="item-count">30+ Varieties</span>
+                    </a>
+                </div>
+                
+            </div>
+        </div>
+    </section>
+
+<section class="section categories-section" id="categories">
+        <div class="container">
+            <div class="section-header text-center mb-5" data-aos="fade-up">
+                <h2>Shop By <span class="gradient-text">Categories</span></h2>
+                <p>Explore our wide range of premium quality seafood</p>
+            </div>
+            
+            <div class="row g-4">
+                <div class="col-md-3 col-6" data-aos="zoom-in" data-aos-delay="100">
+                    <a class="category-card text-decoration-none" aria-label="Shop fish">
+                        <div class="category-img">
+                            <img src="images/katla_whole_1__1_1.jpg" alt="Fish">
+                        </div>
+                        <h5>Fish</h5>
+                        <span class="item-count">50+ Varieties</span>
+                    </a>
+                </div>
+                <div class="col-md-3 col-6" data-aos="zoom-in" data-aos-delay="200">
+                    <a class="category-card text-decoration-none" aria-label="Shop chicken">
+                        <div class="category-img">
+                            <img src="images/" alt="Chicken">
+                        </div>
+                        <h5>Chicken</h5>
+                        <span class="item-count">20+ Varieties</span>
+                    </a>
+                </div>
+                <div class="col-md-3 col-6" data-aos="zoom-in" data-aos-delay="300">
+                    <a class="category-card text-decoration-none" aria-label="Shop mutton">
+                        <div class="category-img">
+                            <img src="https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=fresh%20mutton%20raw%20premium%20meat%20lamb&image_size=square_hd" alt="Mutton">
+                        </div>
+                        <h5>Mutton</h5>
+                        <span class="item-count">15+ Varieties</span>
+                    </a>
+                </div>
+                 <div class="col-md-3 col-6" data-aos="zoom-in" data-aos-delay="300">
+                    <a class="category-card text-decoration-none"  aria-label="Shop mutton">
+                        <div class="category-img">
+                            <img src="https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=fresh%20mutton%20raw%20premium%20meat%20lamb&image_size=square_hd" alt="Mutton">
+                        </div>
+                        <h5>Mutton</h5>
+                        <span class="item-count">15+ Varieties</span>
+                    </a>
+                </div>
+
+                
+            </div>
+        </div>
+    </section>
+
+
+
+
+    <section class="section about-section" id="about">
+        <div class="container">
+            <div class="row align-items-center g-5">
+                <div class="col-lg-6" data-aos="fade-right">
+                    <img src="images/WhatsApp Image 2026-07-18 at 4.59.56 PM.jpeg" alt="Fresh seafood prepared by Yazer Fish Shop" class="img-fluid rounded-4 shadow-lg">
+                </div>
+                <div class="col-lg-6" data-aos="fade-left">
+                    <div class="section-header mb-4">
+                        <h2>About <span class="gradient-text">Yazer Fish Shop</span></h2>
+                        <p>Started by our grandfather near Pollachi Railway Station, he was among the first wholesale fish merchants in Pollachi, sourcing fish from Rameswaram by train in thermocol boxes.</p>
+                    </div>
+                    <p>After market losses, the business continued as a trusted retail fish shop. Today the third generation continues the legacy with hygienic packing, fresh seafood, fast local delivery and digital branding.</p>
+                    <div class="row g-3 mt-2">
+                        <div class="col-sm-6"><div class="glass-card p-3 h-100"><i class="bi bi-water fs-3 text-primary"></i><h5 class="mt-2 mb-1">Fresh Daily</h5><p class="mb-0 small">Quality checked before packing.</p></div></div>
+                        <div class="col-sm-6"><div class="glass-card p-3 h-100"><i class="bi bi-bag-check fs-3 text-primary"></i><h5 class="mt-2 mb-1">Hygienic Packing</h5><p class="mb-0 small">Prepared with care for your home.</p></div></div>
+                    </div>
+                    <!-- <a href="shop.html" class="btn btn-primary mt-4">Shop Fresh Seafood <i class="bi bi-arrow-right"></i></a> -->
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- <section class="section products-section">
+        <div class="container">
+            <div class="section-header text-center mb-5" data-aos="fade-up">
+                <h2>Featured <span class="gradient-text">Products</span></h2>
+                <p>Handpicked fresh seafood for you</p>
+            </div>
+            
+            <div class="row g-4" id="products-container">
+            </div>
+        </div>
+    </section>
+
+    <section class="section fresh-catch-section">
+        <div class="container">
+            <div class="fresh-catch-card" data-aos="fade-up">
+                <div class="row align-items-center">
+                    <div class="col-lg-6">
+                        <span class="badge badge-fresh">Fresh Today!</span>
+                        <h2>Today's Fresh Catch</h2>
+                        <p class="lead">King Fish (Surmai) - Premium Quality</p>
+                        <div class="stock-info">
+                            <div class="d-flex align-items-center gap-3 mb-2">
+                                <div class="countdown" id="stock-countdown">15</div>
+                                <span class="text-danger">Only Left!</span>
+                            </div>
+                            <div class="progress stock-progress">
+                                <div class="progress-bar" id="stock-progress" style="width: 30%"></div>
+                            </div>
+                        </div>
+                        <div class="price-tag">
+                            <span class="price">₹899 <span class="text-muted text-decoration-line-through ms-2">₹1299</span></span>
+                            <span class="weight">/ kg</span>
+                        </div>
+                        <button class="btn btn-primary btn-lg mt-3" onclick="addToCart('king-fish', 'King Fish (Surmai)', 899, 'kg')">
+                            <i class="bi bi-cart3"></i> Add to Cart
+                        </button>
+                    </div>
+                    <div class="col-lg-6 text-center">
+                        <img src="https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=fresh%20king%20fish%20surmai%20whole%20premium%20seafood%20ocean%20blue%20background&image_size=square_hd" alt="King Fish" class="img-fluid">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section> -->
+
+    <!-- <section class="section offers-section" id="offers">
+        <div class="container">
+            <div class="section-header text-center mb-5" data-aos="fade-up">
+                <h2>Combo <span class="gradient-text">Offers</span></h2>
+                <p>Buy more, save more!</p>
+            </div>
+            
+            <div class="row g-4">
+                <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="100">
+                    <div class="offer-card">
+                        <div class="offer-badge">Family Pack</div>
+                        <img src="https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=family%20pack%20seafood%20assortment%20fish%20prawns%20crab&image_size=square_hd" alt="Family Pack">
+                        <div class="offer-content">
+                            <h4>Seafood Feast Pack</h4>
+                            <p>Fish + Prawns + Crab</p>
+                            <div class="price">₹1,999 <span class="old-price">₹2,599</span></div>
+                            <button class="btn btn-outline-primary w-100">Grab Now</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="200">
+                    <div class="offer-card">
+                        <div class="offer-badge weekend">Weekend Offer</div>
+                        <img src="https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=weekend%20special%20seafood%20grill%20pack&image_size=square_hd" alt="Weekend Offer">
+                        <div class="offer-content">
+                            <h4>Grill Special Combo</h4>
+                            <p>Prawns + Fish + Squid</p>
+                            <div class="price">₹1,499 <span class="old-price">₹1,999</span></div>
+                            <button class="btn btn-outline-primary w-100">Grab Now</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="300">
+                    <div class="offer-card">
+                        <div class="offer-badge festival">Festival Combo</div>
+                        <img src="https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=festival%20celebration%20seafood%20premium%20assortment&image_size=square_hd" alt="Festival Combo">
+                        <div class="offer-content">
+                            <h4>Celebration Pack</h4>
+                            <p>Lobster + Crab + Prawns</p>
+                            <div class="price">₹3,499 <span class="old-price">₹4,499</span></div>
+                            <button class="btn btn-outline-primary w-100">Grab Now</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section> -->
+
+    <section class="section why-choose-us-section">
+        <div class="container">
+            <div class="section-header text-center mb-5" data-aos="fade-up">
+                <h2>Why Choose <span class="gradient-text">Us</span></h2>
+                <p>We deliver the best quality seafood</p>
+            </div>
+            
+            <div class="row g-4">
+                <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="100">
+                    <div class="feature-card text-center">
+                        <div class="feature-icon">
+                            <i class="bi bi-check-circle-fill"></i>
+                        </div>
+                        <h4>100% Fresh</h4>
+                        <p>Directly from ocean to your home</p>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="200">
+                    <div class="feature-card text-center">
+                        <div class="feature-icon">
+                            <i class="bi bi-truck"></i>
+                        </div>
+                        <h4>Same Day Delivery</h4>
+                        <p>Order before 12 PM for same day</p>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="300">
+                    <div class="feature-card text-center">
+                        <div class="feature-icon">
+                            <i class="bi bi-shield-check"></i>
+                        </div>
+                        <h4>Quality Checked</h4>
+                        <p>Every product quality assured</p>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="400">
+                    <div class="feature-card text-center">
+                        <div class="feature-icon">
+                            <i class="bi bi-arrow-counterclockwise"></i>
+                        </div>
+                        <h4>Easy Returns</h4>
+                        <p>100% money back guarantee</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section stats-section">
+        <div class="container">
+            <div class="stats-wrapper glass-card" data-aos="fade-up">
+                <div class="row text-center">
+                    <div class="col-lg-3 col-md-6 mb-4 mb-lg-0">
+                        <div class="stat-item">
+                            <span class="stat-number" data-count="5000">0</span>
+                            <span class="stat-label">Happy Customers</span>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6 mb-4 mb-lg-0">
+                        <div class="stat-item">
+                            <span class="stat-number" data-count="250">0</span>
+                            <span class="stat-label">Daily Orders</span>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6 mb-4 mb-lg-0">
+                        <div class="stat-item">
+                            <span class="stat-number" data-count="100">0</span>
+                            <span class="stat-label">% Fresh</span>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6">
+                        <div class="stat-item">
+                            <span class="stat-number" data-count="50">0</span>
+                            <span class="stat-label">Fish Varieties</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section testimonials-section" id="testimonials">
+        <div class="container">
+            <div class="section-header text-center mb-5" data-aos="fade-up">
+                <h2>What Our <span class="gradient-text">Customers Say</span></h2>
+                <p>Don't just take our word for it</p>
+            </div>
+            
+            <div class="swiper testimonials-swiper" data-aos="fade-up">
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide">
+                        <div class="testimonial-card glass-card">
+                            <div class="stars">
+                                <i class="bi bi-star-fill"></i>
+                                <i class="bi bi-star-fill"></i>
+                                <i class="bi bi-star-fill"></i>
+                                <i class="bi bi-star-fill"></i>
+                                <i class="bi bi-star-fill"></i>
+                            </div>
+                            <p class="testimonial-text">"Amazing quality! The fish was so fresh and delivery was on time. Highly recommend Yazer Fish Shop!"</p>
+                            <div class="testimonial-author">
+                                <img src="https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=professional%20profile%20photo%20indian%20woman%20smiling&image_size=square" alt="Customer">
+                                <div>
+                                    <h6>Priya Sharma</h6>
+                                    <span>Mumbai</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="swiper-slide">
+                        <div class="testimonial-card glass-card">
+                            <div class="stars">
+                                <i class="bi bi-star-fill"></i>
+                                <i class="bi bi-star-fill"></i>
+                                <i class="bi bi-star-fill"></i>
+                                <i class="bi bi-star-fill"></i>
+                                <i class="bi bi-star-fill"></i>
+                            </div>
+                            <p class="testimonial-text">"Best seafood in town! Hygienic packing and super fast delivery. My family loves it!"</p>
+                            <div class="testimonial-author">
+                                <img src="https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=professional%20profile%20photo%20indian%20man%20smiling&image_size=square" alt="Customer">
+                                <div>
+                                    <h6>Rahul Verma</h6>
+                                    <span>Delhi</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="swiper-slide">
+                        <div class="testimonial-card glass-card">
+                            <div class="stars">
+                                <i class="bi bi-star-fill"></i>
+                                <i class="bi bi-star-fill"></i>
+                                <i class="bi bi-star-fill"></i>
+                                <i class="bi bi-star-fill"></i>
+                                <i class="bi bi-star-fill"></i>
+                            </div>
+                            <p class="testimonial-text">"Great variety and premium quality. The ready to cook items are a lifesaver!"</p>
+                            <div class="testimonial-author">
+                                <img src="https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=professional%20profile%20photo%20indian%20woman%20businesswoman&image_size=square" alt="Customer">
+                                <div>
+                                    <h6>Anita Patel</h6>
+                                    <span>Bangalore</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="swiper-pagination"></div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section delivery-process-section">
+        <div class="container">
+            <div class="section-header text-center mb-5" data-aos="fade-up">
+                <h2>Our <span class="gradient-text">Delivery Process</span></h2>
+                <p>From ocean to your doorstep</p>
+            </div>
+            
+            <div class="timeline">
+                <div class="row">
+                    <div class="col-lg-2 col-md-4 col-6 text-center mb-4" data-aos="fade-up" data-aos-delay="100">
+                        <div class="timeline-step">
+                            <div class="step-icon"><i class="bi bi-cart-check"></i></div>
+                            <h5>Order</h5>
+                        </div>
+                    </div>
+                    <div class="col-lg-2 col-md-4 col-6 text-center mb-4" data-aos="fade-up" data-aos-delay="200">
+                        <div class="timeline-step">
+                            <div class="step-icon"><i class="bi bi-water"></i></div>
+                            <h5>Cleaning</h5>
+                        </div>
+                    </div>
+                    <div class="col-lg-2 col-md-4 col-6 text-center mb-4" data-aos="fade-up" data-aos-delay="300">
+                        <div class="timeline-step">
+                            <div class="step-icon"><i class="bi bi-box-seam"></i></div>
+                            <h5>Packing</h5>
+                        </div>
+                    </div>
+                    <div class="col-lg-2 col-md-4 col-6 text-center mb-4" data-aos="fade-up" data-aos-delay="400">
+                        <div class="timeline-step">
+                            <div class="step-icon"><i class="bi bi-truck"></i></div>
+                            <h5>Shipping</h5>
+                        </div>
+                    </div>
+                    <div class="col-lg-2 col-md-4 col-6 text-center mb-4" data-aos="fade-up" data-aos-delay="500">
+                        <div class="timeline-step">
+                            <div class="step-icon"><i class="bi bi-house-check"></i></div>
+                            <h5>Delivery</h5>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+<section class="section py-5 newsletter-section" id="contact">
+    <div class="container">
+
+        <div class="text-center mb-5">
+            <h2 class="fw-bold">
+                Get In <span class="text-primary">Touch</span>
+            </h2>
+            <p class="text-muted">
+                Contact Yazer Fish Shop for Fresh Sea Fish, Fresh Water Fish,
+                Catering Orders & Bulk Supply in Pollachi.
+            </p>
+        </div>
+
+        <div class="row g-4 align-items-stretch">
+
+            <!-- Contact Information -->
+            <div class="col-lg-5">
+
+                <div class="glass-card h-100 p-4 rounded-4 shadow">
+
+                    <h4 class="mb-4 fw-bold">
+                        Contact Information
+                    </h4>
+
+                    <!-- Address -->
+                    <div class="d-flex align-items-start mb-4">
+                        <i class="fas fa-map-marker-alt text-danger fa-lg mt-1 me-3"></i>
+
+                        <div>
+                            <h6 class="mb-1 fw-semibold">Address</h6>
+                            <p class="mb-0 text-muted">
+                                Gandhi Market Road,<br>
+                                Vinayagar Kovil,<br>
+                                Pollachi - 642001,<br>
+                                Tamil Nadu.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Phone 1 -->
+                    <div class="d-flex align-items-center mb-3">
+                        <i class="fas fa-phone text-primary fa-lg me-3"></i>
+
+                        <div>
+                            <h6 class="mb-0">Call Us</h6>
+
+                            <a href="tel:+916374613587"
+                                class="text-decoration-none">
+                                +91 63746 13587
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Phone 2 -->
+                    <div class="d-flex align-items-center mb-3">
+                        <i class="fas fa-phone text-primary fa-lg me-3"></i>
+
+                        <div>
+                            <h6 class="mb-0">Support</h6>
+
+                            <a href="tel:+916369090343"
+                                class="text-decoration-none">
+                                +91 63690 90343
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- WhatsApp -->
+                    <div class="d-flex align-items-center mb-4">
+                        <i class="fab fa-whatsapp text-success fa-lg me-3"></i>
+
+                        <div>
+                            <h6 class="mb-0">WhatsApp</h6>
+
+                            <a href="https://wa.me/916374613587"
+                                target="_blank"
+                                class="text-decoration-none">
+                                Chat with Us
+                            </a>
+                        </div>
+                    </div>
+
+                    <hr>
+
+                    <!-- Buttons -->
+                    <div class="row g-2 mt-3">
+
+                            <div class="col-4">
+                                <a href="https://wa.me/916374613587"
+                                    target="_blank"
+                                    class="btn contact-btn whatsapp-btn w-100">
+                                    <i class="fab fa-whatsapp"></i>
+                                </a>
+                            </div>
+
+                            <div class="col-4">
+                                <a href="tel:+916374613587"
+                                    class="btn contact-btn call-btn w-100"> 
+                                    <i class="fas fa-phone"></i>
+                                </a>
+                            </div>
+
+                            <div class="col-4">
+                                <a href="https://maps.google.com/?q=Yazer+Fish+Shop+Pollachi"
+                                    target="_blank"
+                                    class="btn contact-btn map-btn w-100">
+                                    <i class="fas fa-location-dot"></i>
+                                </a>
+                            </div>
+
+                        </div>
+
+                </div>
+
+            </div>
+
+            <!-- Google Map -->
+            <div class="col-lg-7">
+
+                <div class="rounded-4 overflow-hidden shadow h-100">
+
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15684.332538507513!2d76.99886634641258!3d10.650649513695198!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3ba8394136e82c0d%3A0xff9593cbbdceba02!2sYAZAR%20FISH%20SHOP%2C%20POLLACHI!5e0!3m2!1sen!2sin!4v1784376142529!5m2!1sen!2sin" width="800" height="550" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="strict-origin-when-cross-origin"></iframe>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+</section>
+
+    <footer class="footer-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 mb-4">
+                    <div class="footer-brand">
+                        <h3><i class="fas fa-fish"></i> Yazer Fish Shop</h3>
+                        <p>Fresh From Ocean To Your Home</p>
+                        <div class="social-links">
+                            <a href="#"><i class="bi bi-whatsapp"></i></a>
+                            <a href="#"><i class="bi bi-instagram"></i></a>
+                            <a href="#"><i class="bi bi-facebook"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-4 mb-4">
+                    <h5>Quick Links</h5>
+                    <ul class="footer-links">
+                        <li><a href="index.html">Home</a></li>
+                        <!-- <li><a href="shop.html">Shop</a></li> -->
+                        <li><a href="#categories">Categories</a></li>
+                        <li><a href="#about">About</a></li>
+                        <li><a href="#testimonials">Testimonials</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                    </ul>
+                </div>
+                <!-- <div class="col-lg-2 col-md-4 mb-4">
+                    <h5>Categories</h5>
+                    <ul class="footer-links">
+                        <li><a href="shop.html?category=fish">Fish</a></li>
+                        <li><a href="shop.html?category=prawns">Prawns</a></li>
+                        <li><a href="shop.html?category=chicken">Chicken</a></li>
+                        <li><a href="shop.html?category=mutton">Mutton</a></li>
+                    </ul>
+                </div> -->
+                <div class="col-lg-4 col-md-4 mb-4">
+                    <h5>Contact Us</h5>
+                    <ul class="footer-contact">
+                        <li><i class="bi bi-geo-alt"></i> Gandhi Market Road,
+                                                                    Vinayagar Kovil,
+                                                                    Pollachi - 642001,
+                                                                    Tamil Nadu.</li>
+                        <li><i class="bi bi-telephone"></i> 91 63746 13587</li>
+                        <!-- <li><i class="bi bi-envelope"></i> hello@yazerfishshop.com</li> -->
+                    </ul>
+                </div>
+            </div>
+            <hr class="my-4">
+            <div class="text-center">
+                <p class="mb-0">&copy; 2026 Yazer Fish Shop. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <div id="notification-toast" class="notification-toast">
+        <div class="toast-content">
+            <i class="bi bi-check-circle-fill"></i>
+            <span id="toast-message">Item added to cart!</span>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    
+    <script src="js/products.js"></script>
+    <script src="js/cart.js"></script>
+    <script src="js/animation.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>
+

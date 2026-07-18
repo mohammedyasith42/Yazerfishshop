@@ -1,0 +1,32 @@
+@media (max-width: 991.98px) {
+    .hero-title {
+        font-size: 2.5rem;
+    }
+    
+    .section {
+        padding: 60px 0;
+    }
+    
+    .cart-sidebar {
+        width: 100%;
+        right: -100%;
+    }
+}
+
+@media (max-width: 767.98px) {
+    .hero-title {
+        font-size: 2rem;
+    }
+    
+    .section-header h2 {
+        font-size: 2rem;
+    }
+    
+    .fresh-catch-card, .newsletter-card, .stats-wrapper {
+        padding: 30px;
+    }
+    
+    .floating-buttons {
+        right: 15px;
+    }
+}
